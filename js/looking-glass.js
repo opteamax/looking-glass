@@ -72,6 +72,7 @@ $(document).ready(function() {
     $.ajax({
       type: 'post',
       url: 'execute.php',
+      timeout: 600000,
       data: $('form').serialize(),
       beforeSend: function() {
         // show loading bar
