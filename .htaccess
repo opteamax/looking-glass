@@ -13,3 +13,10 @@
     Deny from all
   </IfModule>
 </Files>
+php_value display_errors Off
+php_value log_errors On
+php_value html_errors Off
+php_value error_log /var/log/php_errors
+php_value max_execution_time 600
+php_value memory_limit 256M
+
