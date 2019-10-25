@@ -1,0 +1,18 @@
+FROM php:7.2-fpm-alpine
+FROM nginx:alpine
+FROM alpine:latest
+
+RUN apk add --no-cache bash git acf-openssh libmcrypt-dev openssl libsodium-dev gmp-dev \
+    && apk --update --progress --no-cache --repository \
+       http://dl-cdn.alpinelinux.org/alpine/v3.7/community add php7-gmp php7-mcrypt  \
+       php7-sodium nginx \
+    && git clone https://github.com/opteamax/looking-glass.git --branch master --single-branch /var/www/html/ \
+    && apk del git \
+    && mkdir -p /var/log/ \
+    && touch /var/log/looking-glass.log \
+    && chown nginx /var/log/looking-glass.log \
+    && cp /var/www/html/config/nginx.conf /etc/nginx/conf.d/default.conf \
+    && cp /var/www/html/config/php-fpm.conf /etc/php/php-fpm.conf \
+    && cp /var/www/html/config/php.ini /etc/php/php.ini
+    
+
